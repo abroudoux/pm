@@ -11,7 +11,8 @@ import (
 func FlagMode() error {
 	flag := os.Args[1]
 
-	if flag == "--file" || flag == "-f" {
+	switch flag {
+	case "--file", "-f":
 		if len(os.Args) == 2 {
 			err := actions.PrintReferenceFile()
 			if err != nil {
@@ -24,21 +25,21 @@ func FlagMode() error {
 				return err
 			}
 		}
-	} else if flag == "--help" || flag == "-h" {
-		printHelpMenu()
-	} else if flag == "--root" || flag == "-r" {
+	case "--root", "-r":
 		err := actions.GoToFileReference()
 		if err != nil {
 			return err
 		}
-	} else if flag == "--version" || flag == "-v" {
+	case "--version", "-v":
 		latestVersion, err := getLatestRelease()
 		if err != nil {
 			return err
 		}
 
 		fmt.Printf("Latest version: %s\n", latestVersion)
-	} else {
+	case "--help", "-h":
+		printHelpMenu()
+	default:
 		err := actions.RunCommandInReferenceFileDirectory()
 		if err != nil {
 			return err
