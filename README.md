@@ -2,8 +2,6 @@
 
 🍀 Run commands from everywhere in your project.
 
-Version : 2.0.0
-
 ## 🚀 Installation
 
 ### Via Homebrew
@@ -60,13 +58,11 @@ Create a branch with a [conventionnal name](https://tilburgsciencehub.com/buildi
 ## 📌 Roadmap
 
 - [ ] Homebrew installation
-- [ ] apt installation
 - [ ] Add options to navigate even faster in your project (wip...)
-- [x] Upload ASCII art
 - [x] Rewrite script in `Go`
 - [ ] Implement `pm -` in go
 - [ ] Option to go to the root of the project
 
 ## 📑 License
 
-This project is under MIT license. For more information, please see the file [LICENSE](./LICENSE).
+This project is under [MIT License](LICENSE).
