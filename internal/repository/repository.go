@@ -2,6 +2,7 @@ package repository
 
 import (
 	"fmt"
+	"net/http"
 	"os"
 
 	"github.com/abroudoux/pm/internal/actions"
@@ -31,7 +32,12 @@ func FlagMode() error {
 			return err
 		}
 	} else if flag == "--version" || flag == "-v" {
-		println("2.0.0")
+		latestVersion, err := getLatestRelease()
+		if err != nil {
+			return err
+		}
+
+		fmt.Printf("Latest version: %s\n", latestVersion)
 	} else {
 		err := actions.RunCommandInReferenceFileDirectory()
 		if err != nil {
@@ -40,6 +46,17 @@ func FlagMode() error {
 	}
 
 	return nil
+}
+
+func getLatestRelease() (string, error) {
+	url := "https://api.github.com/repos/abroudoux/pm/releases/latest"
+	res, err := http.Get(url)
+	if err != nil {
+		return "", err
+	}
+
+	latestVersion := res.Header.Get("tag_name")
+	return latestVersion, nil
 }
 
 func printHelpMenu() {
